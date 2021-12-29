@@ -6,31 +6,30 @@ import (
 	"os"
 )
 
-var apikey string = os.Getenv("KARGA_TOKEN")
-
 func base_url() *url.URL {
 	return &url.URL{
 		Scheme:     "https",
 		Host:       "alphavantage.co",
 		Path:       "query",
 		ForceQuery: false,
-		RawQuery:   fmt.Sprintf("apikey=%s", apikey),
+		RawQuery:   fmt.Sprintf("apikey=%s", os.Getenv("KARGA_TOKEN")),
 	}
 }
 
-func overview(base_url *url.URL, symbol string) {
+func overview(symbol string) {
 	const ENDPOINT_URL string = "OVERVIEW"
 
-	values := base_url.Query()
+	baseUrl := base_url()
+	values := baseUrl.Query()
 
 	values.Add("function", ENDPOINT_URL)
 	values.Add("symbol", symbol)
 
-	base_url.RawQuery = values.Encode()
+	baseUrl.RawQuery = values.Encode()
 
-	fmt.Println(base_url)
+	fmt.Println(baseUrl)
 }
 
 func main() {
-	overview(base_url(), "AAPL")
+	overview("AAPL")
 }
