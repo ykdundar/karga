@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"net/http"
 	"net/url"
 	"os"
 )
@@ -16,7 +18,7 @@ func base_url() *url.URL {
 	}
 }
 
-func overview(symbol string) {
+func overview(symbol string) string {
 	const ENDPOINT_URL string = "OVERVIEW"
 
 	baseUrl := base_url()
@@ -27,9 +29,15 @@ func overview(symbol string) {
 
 	baseUrl.RawQuery = values.Encode()
 
-	fmt.Println(baseUrl)
+	response, err := http.Get(baseUrl.String())
+	if err != nil {
+		return fmt.Sprintf("The HTTP request is failed with an error %s\n ", err)
+	} else {
+		data, _ := ioutil.ReadAll(response.Body)
+		return string(data)
+	}
 }
 
 func main() {
-	overview("AAPL")
+	fmt.Println(overview("IBM"))
 }
