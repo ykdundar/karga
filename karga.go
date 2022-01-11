@@ -8,56 +8,8 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strconv"
 )
-
-type Overview struct {
-	Symbol                      string `json:"Symbol"`
-	AssetType                   string `json:"AssetType"`
-	Name                        string `json:"Name"`
-	Description                 string `json:"Description"`
-	Cik                         string `json:"CIK"`
-	Exchange                    string `json:"Exchange"`
-	Currency                    string `json:"Currency"`
-	Country                     string `json:"Country"`
-	Sector                      string `json:"Sector"`
-	Industry                    string `json:"Industry"`
-	Address                     string `json:"Address"`
-	FiscalYearEnd               string `json:"FiscalYearEnd"`
-	LatestQuarter               string `json:"LatestQuarter"`
-	MarketCapitalization        string `json:"MarketCapitalization"`
-	Ebitda                      string `json:"EBITDA"`
-	PERatio                     string `json:"PERatio"`
-	PEGRatio                    string `json:"PEGRatio"`
-	BookValue                   string `json:"BookValue"`
-	DividendPerShare            string `json:"DividendPerShare"`
-	DividendYield               string `json:"DividendYield"`
-	Eps                         string `json:"EPS"`
-	RevenuePerShareTTM          string `json:"RevenuePerShareTTM"`
-	ProfitMargin                string `json:"ProfitMargin"`
-	OperatingMarginTTM          string `json:"OperatingMarginTTM"`
-	ReturnOnAssetsTTM           string `json:"ReturnOnAssetsTTM"`
-	ReturnOnEquityTTM           string `json:"ReturnOnEquityTTM"`
-	RevenueTTM                  string `json:"RevenueTTM"`
-	GrossProfitTTM              string `json:"GrossProfitTTM"`
-	DilutedEPSTTM               string `json:"DilutedEPSTTM"`
-	QuarterlyEarningsGrowthYOY  string `json:"QuarterlyEarningsGrowthYOY"`
-	QuarterlyRevenueGrowthYOY   string `json:"QuarterlyRevenueGrowthYOY"`
-	AnalystTargetPrice          string `json:"AnalystTargetPrice"`
-	TrailingPE                  string `json:"TrailingPE"`
-	ForwardPE                   string `json:"ForwardPE"`
-	PriceToSalesRatioTTM        string `json:"PriceToSalesRatioTTM"`
-	PriceToBookRatio            string `json:"PriceToBookRatio"`
-	EVToRevenue                 string `json:"EVToRevenue"`
-	EVToEBITDA                  string `json:"EVToEBITDA"`
-	Beta                        string `json:"Beta"`
-	FityTwoWeekHigh             string `json:"52WeekHigh"`
-	FiftyTwoWeekLow             string `json:"52WeekLow"`
-	FifyDayMovingAverage        string `json:"50DayMovingAverage"`
-	TwoHunderedDayMovingAverage string `json:"200DayMovingAverage"`
-	SharesOutstanding           string `json:"SharesOutstanding"`
-	DividendDate                string `json:"DividendDate"`
-	ExDividendDate              string `json:"ExDividendDate"`
-}
 
 func base_url() *url.URL {
 	return &url.URL{
@@ -67,6 +19,61 @@ func base_url() *url.URL {
 		ForceQuery: false,
 		RawQuery:   fmt.Sprintf("apikey=%s", os.Getenv("KARGA_TOKEN")),
 	}
+}
+func rsi(symbol string, interval string, time_period int, series_type string) (RSIResponse, error) {
+	const ENDPOINT_URL string = "RSI"
+	baseUrl := base_url()
+	values := baseUrl.Query()
+
+	values.Add("function", ENDPOINT_URL)
+	values.Add("symbol", symbol)
+	values.Add("interval", interval)
+	values.Add("time_period", strconv.Itoa(time_period))
+	values.Add("series_type", series_type)
+
+	baseUrl.RawQuery = values.Encode()
+
+	response, err := http.Get(baseUrl.String())
+
+	if err != nil {
+		return RSIResponse{}, errors.New("the HTTP request is failed with an error")
+	} else {
+		data, _ := ioutil.ReadAll(response.Body)
+
+		rsi := RSIResponse{}
+
+		json.Unmarshal(data, &rsi)
+
+		return rsi, nil
+	}
+
+}
+
+func globalQuote(symbol string) (GlobalQuote, error) {
+	const ENDPOINT_URL string = "GLOBAL_QUOTE"
+
+	baseUrl := base_url()
+	values := baseUrl.Query()
+
+	values.Add("function", ENDPOINT_URL)
+	values.Add("symbol", symbol)
+
+	baseUrl.RawQuery = values.Encode()
+
+	response, err := http.Get(baseUrl.String())
+
+	if err != nil {
+		return GlobalQuote{}, errors.New("the HTTP request is failed with an error")
+	} else {
+		data, _ := ioutil.ReadAll(response.Body)
+
+		globalQuote := GlobalQuote{}
+
+		json.Unmarshal(data, &globalQuote)
+
+		return globalQuote, nil
+	}
+
 }
 
 func overview(symbol string) (Overview, error) {
@@ -96,7 +103,7 @@ func overview(symbol string) (Overview, error) {
 }
 
 func main() {
-	response, err := overview("IBM")
+	response, err := rsi("IBM", "weekly", 10, "open")
 
 	if err != nil {
 		fmt.Println(err)
