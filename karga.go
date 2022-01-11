@@ -20,6 +20,33 @@ func base_url() *url.URL {
 		RawQuery:   fmt.Sprintf("apikey=%s", os.Getenv("KARGA_TOKEN")),
 	}
 }
+
+func intraday(symbol, interval string) (Intraday, error) {
+	const ENDPOINT_URL string = "TIME_SERIES_INTRADAY"
+	baseUrl := base_url()
+	values := baseUrl.Query()
+
+	values.Add("function", ENDPOINT_URL)
+	values.Add("symbol", symbol)
+	values.Add("interval", interval)
+
+	baseUrl.RawQuery = values.Encode()
+
+	response, err := http.Get(baseUrl.String())
+
+	if err != nil {
+		return Intraday{}, errors.New("the HTTP request is failed with an error")
+	} else {
+		data, _ := ioutil.ReadAll(response.Body)
+
+		intraday := Intraday{}
+
+		json.Unmarshal(data, &intraday)
+
+		return intraday, nil
+	}
+}
+
 func rsi(symbol string, interval string, time_period int, series_type string) (RSIResponse, error) {
 	const ENDPOINT_URL string = "RSI"
 	baseUrl := base_url()
@@ -103,7 +130,7 @@ func overview(symbol string) (Overview, error) {
 }
 
 func main() {
-	response, err := rsi("IBM", "weekly", 10, "open")
+	response, err := intraday("IBM", "5min")
 
 	if err != nil {
 		fmt.Println(err)
