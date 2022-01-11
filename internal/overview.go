@@ -1,4 +1,11 @@
-package main
+package internal
+
+import (
+	"encoding/json"
+	"errors"
+	"io/ioutil"
+	"net/http"
+)
 
 type Overview struct {
 	Symbol                      string `json:"Symbol"`
@@ -47,4 +54,30 @@ type Overview struct {
 	SharesOutstanding           string `json:"SharesOutstanding"`
 	DividendDate                string `json:"DividendDate"`
 	ExDividendDate              string `json:"ExDividendDate"`
+}
+
+func OverviewRequest(symbol string) (Overview, error) {
+	const ENDPOINT_URL string = "OVERVIEW"
+
+	baseUrl := base_url()
+	values := baseUrl.Query()
+
+	values.Add("function", ENDPOINT_URL)
+	values.Add("symbol", symbol)
+
+	baseUrl.RawQuery = values.Encode()
+
+	response, err := http.Get(baseUrl.String())
+
+	if err != nil {
+		return Overview{}, errors.New("the HTTP request is failed with an error")
+	} else {
+		data, _ := ioutil.ReadAll(response.Body)
+
+		overview := Overview{}
+
+		json.Unmarshal(data, &overview)
+
+		return overview, nil
+	}
 }

@@ -1,4 +1,11 @@
-package main
+package internal
+
+import (
+	"encoding/json"
+	"errors"
+	"io/ioutil"
+	"net/http"
+)
 
 type TimeSeriesValue struct {
 	OneOpen    string `json:"1. open, omitempty"`
@@ -22,4 +29,30 @@ type Intraday struct {
 	TimeSeries15Min map[string]TimeSeriesValue `json:"Time Series (15min)"`
 	TimeSeries30Min map[string]TimeSeriesValue `json:"Time Series (30min)"`
 	TimeSeries60Min map[string]TimeSeriesValue `json:"Time Series (60min)"`
+}
+
+func IntradayRequest(symbol, interval string) (Intraday, error) {
+	const ENDPOINT_URL string = "TIME_SERIES_INTRADAY"
+	baseUrl := base_url()
+	values := baseUrl.Query()
+
+	values.Add("function", ENDPOINT_URL)
+	values.Add("symbol", symbol)
+	values.Add("interval", interval)
+
+	baseUrl.RawQuery = values.Encode()
+
+	response, err := http.Get(baseUrl.String())
+
+	if err != nil {
+		return Intraday{}, errors.New("the HTTP request is failed with an error")
+	} else {
+		data, _ := ioutil.ReadAll(response.Body)
+
+		intraday := Intraday{}
+
+		json.Unmarshal(data, &intraday)
+
+		return intraday, nil
+	}
 }
