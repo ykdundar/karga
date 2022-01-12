@@ -9,7 +9,7 @@ import (
 )
 
 type RSIValue struct {
-	Rsi string `json:"RSI"`
+	Rsi float64 `json:"RSI,string"`
 }
 
 type RSIResponse struct {

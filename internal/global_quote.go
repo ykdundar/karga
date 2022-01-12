@@ -12,16 +12,16 @@ type GlobalQuote struct {
 }
 
 type GlobalQuoteDetails struct {
-	Symbol           string `json:"01. symbol"`
-	Open             string `json:"02. open"`
-	High             string `json:"03. high"`
-	Low              string `json:"04. low"`
-	Price            string `json:"05. price"`
-	Volume           string `json:"06. volume"`
-	LatestTradingDay string `json:"07. latest trading day"`
-	PreviousClose    string `json:"08. previous close"`
-	Change           string `json:"09. change"`
-	ChangePercent    string `json:"10. change percent"`
+	Symbol           string  `json:"01. symbol"`
+	Open             float64 `json:"02. open,string"`
+	High             float64 `json:"03. high,string"`
+	Low              float64 `json:"04. low,string"`
+	Price            float64 `json:"05. price,string"`
+	Volume           int     `json:"06. volume,string"`
+	LatestTradingDay string  `json:"07. latest trading day"`
+	PreviousClose    float64 `json:"08. previous close,string"`
+	Change           float64 `json:"09. change,string"`
+	ChangePercent    float64 `json:"10. change percent,string"`
 }
 
 func GlobalQuoteRequest(symbol string) (GlobalQuote, error) {
