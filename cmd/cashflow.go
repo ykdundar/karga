@@ -25,14 +25,4 @@ var cashflowCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(cashflowCmd)
 	cashflowCmd.PersistentFlags().StringVarP(&symbol, "symbol", "s", "IBM", "Stock symbol I.e. IBM.")
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// cashflowCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// cashflowCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

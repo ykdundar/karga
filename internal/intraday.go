@@ -15,6 +15,7 @@ type TimeSeriesValue struct {
 	Volume float64 `json:"5. volume,string"`
 }
 
+// TODO: Fix dynamic TimeSeries key
 type Intraday struct {
 	MetaData struct {
 		Information   string `json:"1. Information"`

@@ -12,6 +12,7 @@ type Balance struct {
 	AnnualReports    []BalanceAnnualReports    `json:"annualReports"`
 	QuarterlyReports []BalanceQuarterlyReports `json:"quarterlyReports"`
 }
+
 type BalanceAnnualReports struct {
 	FiscalDateEnding                       string `json:"fiscalDateEnding"`
 	ReportedCurrency                       string `json:"reportedCurrency"`
