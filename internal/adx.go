@@ -12,6 +12,7 @@ type ADX struct {
 	MetaData             MetaDataADX                          `json:"Meta Data"`
 	TechnicalAnalysisADX map[string]TechnicalAnalysisADXValue `json:"Technical Analysis: ADX"`
 }
+
 type MetaDataADX struct {
 	Symbol        string `json:"1: Symbol"`
 	Indicator     string `json:"2: Indicator"`
@@ -20,13 +21,14 @@ type MetaDataADX struct {
 	TimePeriod    int    `json:"5: Time Period"`
 	TimeZone      string `json:"6: Time Zone"`
 }
+
 type TechnicalAnalysisADXValue struct {
 	Adx string `json:"ADX"`
 }
 
 func ADXRequest(symbol string, interval string, time_period int) (ADX, error) {
-
 	const ENDPOINT_URL string = "ADX"
+
 	baseUrl := base_url()
 	values := baseUrl.Query()
 

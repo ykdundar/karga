@@ -10,11 +10,11 @@ import (
 // incomeCmd represents the income command
 var incomeCmd = &cobra.Command{
 	Use:   "income",
-	Short: "This command fetches the annual and quarterly income statements",
-	Long: `This command fetches the annual and quarterly income statements.
-	Data is generally refreshed on the same day a company reports its latest 
-	earnings and financials.`,
+	Short: "Annual and quarterly income statements",
+	Long: `Annual and quarterly income statements.
 
+Data is generally refreshed on the same day a company reports its latest 
+earnings and financials.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(internal.IncomeStatementRequest(symbol))
 	},
@@ -22,5 +22,6 @@ var incomeCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(incomeCmd)
+
 	incomeCmd.PersistentFlags().StringVarP(&symbol, "symbol", "s", "IBM", "Stock symbol I.e. IBM.")
 }

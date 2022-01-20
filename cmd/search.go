@@ -7,25 +7,20 @@ import (
 	"github.com/ykdundar/karga/internal"
 )
 
-var keywords string
+var keyword string
 
-// symbolCmd represents the symbol command
+// searchCmd represents the symbol command
 var searchCmd = &cobra.Command{
 	Use:   "search",
-	Short: "This command build an auto-complete search box",
-	Long: `This command build an auto-complete search box
-	It fetches the best-matching symbols and market information 
-	based on keywords of your choice. The search results also contain match scores
-	that provide you with the full flexibility to develop your own search and
-	filtering logic.`,
-
+	Short: "Search for a stock with a keyword or symbol",
+	Long:  "The best-matching symbols and market information based on keyword of your choice.",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(internal.SearchRequest(symbol, keywords))
+		fmt.Println(internal.SearchRequest(keyword))
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
-	searchCmd.PersistentFlags().StringVarP(&symbol, "symbol", "s", "IBM", "Stock symbol I.e. IBM.")
-	searchCmd.PersistentFlags().StringVarP(&keywords, "keywords", "k", "microsoft", "A text string of your choice. E.g: keywords=microsoft.")
+
+	searchCmd.PersistentFlags().StringVarP(&keyword, "keywords", "k", "microsoft", "A text string of your choice. E.g: microsoft.")
 }

@@ -22,14 +22,13 @@ type BestMatches struct {
 	MatchScore  string `json:"9. matchScore"`
 }
 
-func SearchRequest(symbol, keywords string) (Search, error) {
+func SearchRequest(keyword string) (Search, error) {
 	const ENDPOINT_URL string = "SYMBOL_SEARCH"
 	baseUrl := base_url()
 	values := baseUrl.Query()
 
 	values.Add("function", ENDPOINT_URL)
-	values.Add("symbol", symbol)
-	values.Add("keywords", keywords)
+	values.Add("keywords", keyword)
 
 	baseUrl.RawQuery = values.Encode()
 
