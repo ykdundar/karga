@@ -11,15 +11,15 @@ type Search struct {
 	BestMatches []BestMatches `json:"bestMatches"`
 }
 type BestMatches struct {
-	OneSymbol      string `json:"1. symbol"`
-	TwoName        string `json:"2. name"`
-	ThreeType      string `json:"3. type"`
-	FourRegion     string `json:"4. region"`
-	FiveMarketOpen string `json:"5. marketOpen"`
-	SixMarketClose string `json:"6. marketClose"`
-	SevenTimezone  string `json:"7. timezone"`
-	EightCurrency  string `json:"8. currency"`
-	NineMatchScore string `json:"9. matchScore"`
+	Symbol      string `json:"1. symbol"`
+	Name        string `json:"2. name"`
+	Type        string `json:"3. type"`
+	Region      string `json:"4. region"`
+	MarketOpen  string `json:"5. marketOpen"`
+	MarketClose string `json:"6. marketClose"`
+	Timezone    string `json:"7. timezone"`
+	Currency    string `json:"8. currency"`
+	MatchScore  string `json:"9. matchScore"`
 }
 
 func SearchRequest(symbol, keywords string) (Search, error) {
