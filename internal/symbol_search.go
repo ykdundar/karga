@@ -10,6 +10,7 @@ import (
 type Search struct {
 	BestMatches []BestMatches `json:"bestMatches"`
 }
+
 type BestMatches struct {
 	Symbol      string `json:"1. symbol"`
 	Name        string `json:"2. name"`
@@ -24,6 +25,7 @@ type BestMatches struct {
 
 func SearchRequest(keyword string) (Search, error) {
 	const ENDPOINT_URL string = "SYMBOL_SEARCH"
+
 	baseUrl := base_url()
 	values := baseUrl.Query()
 

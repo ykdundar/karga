@@ -24,12 +24,14 @@ type MetaDataStoch struct {
 	SlowDMAType   int    `json:"5.5: SlowD MA Type"`
 	TimeZone      string `json:"6: Time Zone"`
 }
+
 type TechnicalAnalysisSTOCHValue struct {
 	SlowK string `json:"SlowK"`
 }
 
 func StochRequest(symbol, interval string) (Stoch, error) {
 	const ENDPOINT_URL string = "STOCH"
+
 	baseUrl := base_url()
 	values := baseUrl.Query()
 

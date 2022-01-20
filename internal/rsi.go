@@ -27,6 +27,7 @@ type RSIResponse struct {
 
 func RSIRequest(symbol string, interval string, time_period int, series_type string) (RSIResponse, error) {
 	const ENDPOINT_URL string = "RSI"
+
 	baseUrl := base_url()
 	values := baseUrl.Query()
 

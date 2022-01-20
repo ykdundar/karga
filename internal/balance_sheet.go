@@ -53,6 +53,7 @@ type BalanceAnnualReports struct {
 	CommonStock                            int    `json:"commonStock,string"`
 	CommonStockSharesOutstanding           int    `json:"commonStockSharesOutstanding,string"`
 }
+
 type BalanceQuarterlyReports struct {
 	FiscalDateEnding                       string `json:"fiscalDateEnding"`
 	ReportedCurrency                       string `json:"reportedCurrency"`
@@ -95,7 +96,6 @@ type BalanceQuarterlyReports struct {
 }
 
 func BalanceSheetRequest(symbol string) (Balance, error) {
-
 	const ENDPOINT_URL string = "BALANCE_SHEET"
 
 	baseUrl := base_url()

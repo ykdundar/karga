@@ -12,10 +12,12 @@ type Earnings struct {
 	AnnualEarnings    []AnnualEarnings    `json:"annualEarnings"`
 	QuarterlyEarnings []QuarterlyEarnings `json:"quarterlyEarnings"`
 }
+
 type AnnualEarnings struct {
 	FiscalDateEnding string  `json:"fiscalDateEnding"`
 	ReportedEPS      float64 `json:"reportedEPS,string"`
 }
+
 type QuarterlyEarnings struct {
 	FiscalDateEnding   string  `json:"fiscalDateEnding"`
 	ReportedDate       string  `json:"reportedDate"`
@@ -26,8 +28,8 @@ type QuarterlyEarnings struct {
 }
 
 func EarningsRequest(symbol string) (Earnings, error) {
-
 	const ENDPOINT_URL string = "EARNINGS"
+
 	baseUrl := base_url()
 	values := baseUrl.Query()
 

@@ -12,6 +12,7 @@ type CashFlow struct {
 	AnnualReports    []CashFlowAnnualReports    `json:"annualReports"`
 	QuarterlyReports []CashFlowQuarterlyReports `json:"quarterlyReports"`
 }
+
 type CashFlowAnnualReports struct {
 	FiscalDateEnding                                          string `json:"fiscalDateEnding"`
 	ReportedCurrency                                          string `json:"reportedCurrency"`
@@ -43,6 +44,7 @@ type CashFlowAnnualReports struct {
 	ChangeInExchangeRate                                      string `json:"changeInExchangeRate"`
 	NetIncome                                                 int    `json:"netIncome,string"`
 }
+
 type CashFlowQuarterlyReports struct {
 	FiscalDateEnding                                          string `json:"fiscalDateEnding"`
 	ReportedCurrency                                          string `json:"reportedCurrency"`

@@ -12,6 +12,7 @@ type IncomeStatement struct {
 	AnnualReports    []AnnualReports    `json:"annualReports"`
 	QuarterlyReports []QuarterlyReports `json:"quarterlyReports"`
 }
+
 type AnnualReports struct {
 	FiscalDateEnding                  string `json:"fiscalDateEnding,string"`
 	ReportedCurrency                  string `json:"reportedCurrency,string"`
@@ -40,6 +41,7 @@ type AnnualReports struct {
 	Ebitda                            int    `json:"ebitda,string"`
 	NetIncome                         int    `json:"netIncome,string"`
 }
+
 type QuarterlyReports struct {
 	FiscalDateEnding                  string `json:"fiscalDateEnding,string"`
 	ReportedCurrency                  string `json:"reportedCurrency,string"`
@@ -70,7 +72,6 @@ type QuarterlyReports struct {
 }
 
 func IncomeStatementRequest(symbol string) (IncomeStatement, error) {
-
 	const ENDPOINT_URL string = "INCOME_STATEMENT"
 
 	baseUrl := base_url()
@@ -94,4 +95,5 @@ func IncomeStatementRequest(symbol string) (IncomeStatement, error) {
 
 		return incomeStatement, nil
 	}
+
 }

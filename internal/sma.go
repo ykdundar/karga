@@ -11,6 +11,7 @@ import (
 type TechnicalAnalysisSMAValues struct {
 	Sma string `json:"SMA"`
 }
+
 type SMA struct {
 	MetaData struct {
 		Symbol        string `json:"1: Symbol"`
@@ -25,8 +26,8 @@ type SMA struct {
 }
 
 func SMARequest(symbol string, interval string, time_period int, series_type string) (SMA, error) {
-
 	const ENDPOINT_URL string = "SMA"
+
 	baseUrl := base_url()
 	values := baseUrl.Query()
 

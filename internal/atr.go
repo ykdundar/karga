@@ -27,8 +27,8 @@ type TechnicalAnalysisATRValues struct {
 }
 
 func ATRRequest(symbol string, interval string, time_period int) (ATR, error) {
-
 	const ENDPOINT_URL string = "ATR"
+
 	baseUrl := base_url()
 	values := baseUrl.Query()
 

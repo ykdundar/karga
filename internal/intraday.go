@@ -34,6 +34,7 @@ type Intraday struct {
 
 func IntradayRequest(symbol, interval string) (Intraday, error) {
 	const ENDPOINT_URL string = "TIME_SERIES_INTRADAY"
+
 	baseUrl := base_url()
 	values := baseUrl.Query()
 

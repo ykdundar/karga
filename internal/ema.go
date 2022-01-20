@@ -12,6 +12,7 @@ type EMA struct {
 	MetaData             MetaDataEma                           `json:"Meta Data"`
 	TechnicalAnalysisEMA map[string]TechnicalAnalysisEMAValues `json:"Technical Analysis: EMA"`
 }
+
 type MetaDataEma struct {
 	Symbol        string `json:"1: Symbol"`
 	Indicator     string `json:"2: Indicator"`
@@ -28,6 +29,7 @@ type TechnicalAnalysisEMAValues struct {
 
 func EMARequest(symbol string, interval string, time_period int, series_type string) (EMA, error) {
 	const ENDPOINT_URL string = "EMA"
+
 	baseUrl := base_url()
 	values := baseUrl.Query()
 
