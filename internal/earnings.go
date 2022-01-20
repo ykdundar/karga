@@ -41,7 +41,7 @@ func EarningsRequest(symbol string) (Earnings, error) {
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return Earnings{}, errors.New("the HTTP request is failed with an error")
+		return Earnings{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 

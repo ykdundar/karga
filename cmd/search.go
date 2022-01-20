@@ -7,8 +7,6 @@ import (
 	"github.com/ykdundar/karga/internal"
 )
 
-var keyword string
-
 // searchCmd represents the symbol command
 var searchCmd = &cobra.Command{
 	Use:   "search",

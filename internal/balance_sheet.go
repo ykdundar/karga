@@ -109,7 +109,7 @@ func BalanceSheetRequest(symbol string) (Balance, error) {
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return Balance{}, errors.New("the HTTP request is failed with an error")
+		return Balance{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 

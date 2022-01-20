@@ -91,7 +91,7 @@ func CashFlowRequest(symbol string) (CashFlow, error) {
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return CashFlow{}, errors.New("the HTTP request is failed with an error")
+		return CashFlow{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 

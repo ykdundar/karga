@@ -85,7 +85,7 @@ func IncomeStatementRequest(symbol string) (IncomeStatement, error) {
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return IncomeStatement{}, errors.New("the HTTP request is failed with an error")
+		return IncomeStatement{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 

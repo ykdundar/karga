@@ -70,7 +70,7 @@ func OverviewRequest(symbol string) (Overview, error) {
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return Overview{}, errors.New("the HTTP request is failed with an error")
+		return Overview{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 

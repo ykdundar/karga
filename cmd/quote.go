@@ -7,9 +7,6 @@ import (
 	"github.com/ykdundar/karga/internal"
 )
 
-// symbol flag represents stock ticker
-var symbol string
-
 // quoteCmd represents the quote command
 var quoteCmd = &cobra.Command{
 	Use:   "quote",

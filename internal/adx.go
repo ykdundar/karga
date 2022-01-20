@@ -42,7 +42,7 @@ func ADXRequest(symbol string, interval string, time_period int) (ADX, error) {
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return ADX{}, errors.New("the HTTP request is failed with an error")
+		return ADX{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 

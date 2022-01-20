@@ -42,7 +42,7 @@ func RSIRequest(symbol string, interval string, time_period int, series_type str
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return RSIResponse{}, errors.New("the HTTP request is failed with an error")
+		return RSIResponse{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 

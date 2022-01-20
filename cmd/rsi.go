@@ -7,9 +7,6 @@ import (
 	"github.com/ykdundar/karga/internal"
 )
 
-var time_period int
-var seriesType string
-
 var rsiCmd = &cobra.Command{
 	Use:   "rsi",
 	Short: "Relative strength index (RSI) values",

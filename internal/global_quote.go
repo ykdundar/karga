@@ -38,7 +38,7 @@ func GlobalQuoteRequest(symbol string) (GlobalQuote, error) {
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return GlobalQuote{}, errors.New("the HTTP request is failed with an error")
+		return GlobalQuote{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 

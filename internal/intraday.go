@@ -47,7 +47,7 @@ func IntradayRequest(symbol, interval string) (Intraday, error) {
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return Intraday{}, errors.New("the HTTP request is failed with an error")
+		return Intraday{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 

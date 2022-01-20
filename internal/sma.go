@@ -42,7 +42,7 @@ func SMARequest(symbol string, interval string, time_period int, series_type str
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return SMA{}, errors.New("the HTTP request is failed with an error")
+		return SMA{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 

@@ -8,8 +8,6 @@ import (
 )
 
 // intradayCmd represents the intraday command
-
-var interval string
 var intradayCmd = &cobra.Command{
 	Use:   "intraday",
 	Short: "Intraday time series ",
