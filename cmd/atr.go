@@ -13,7 +13,7 @@ var atrCmd = &cobra.Command{
 	Short: "Average true range (ATR) values",
 	Long:  "Average true range (ATR) values",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(internal.ATRRequest(symbol, interval, time_period))
+		fmt.Println(internal.ATRRequest(symbol, interval, timePeriod))
 	},
 }
 
@@ -22,5 +22,5 @@ func init() {
 
 	atrCmd.PersistentFlags().StringVarP(&symbol, "symbol", "s", "IBM", "Stock symbol I.e. IBM.")
 	atrCmd.PersistentFlags().StringVarP(&interval, "interval", "i", "weekly", "The following values are supported: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly.")
-	atrCmd.PersistentFlags().IntVarP(&time_period, "timeperiod", "t", 60, "Number of data points used to calculate each RSI value. Positive integers are accepted (e.g., 60, 200)")
+	atrCmd.PersistentFlags().IntVarP(&timePeriod, "timeperiod", "t", 60, "Number of data points used to calculate each RSI value. Positive integers are accepted (e.g., 60, 200)")
 }

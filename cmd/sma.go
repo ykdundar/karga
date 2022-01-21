@@ -13,7 +13,7 @@ var smaCmd = &cobra.Command{
 	Short: "Simple moving average (SMA) values",
 	Long:  "Simple moving average (SMA) values",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(internal.SMARequest(symbol, interval, time_period, seriesType))
+		fmt.Println(internal.SMARequest(symbol, interval, timePeriod, seriesType))
 	},
 }
 
@@ -22,6 +22,6 @@ func init() {
 
 	smaCmd.PersistentFlags().StringVarP(&symbol, "symbol", "s", "IBM", "Stock symbol I.e. IBM.")
 	smaCmd.PersistentFlags().StringVarP(&interval, "interval", "i", "weekly", " I.e. 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly.")
-	smaCmd.PersistentFlags().IntVarP(&time_period, "timeperiod", "t", 60, "Number of data points used to calculate each RSI value. Positive integers are accepted (e.g., timeperiod=60, timeperiod=200)")
+	smaCmd.PersistentFlags().IntVarP(&timePeriod, "timeperiod", "t", 60, "Number of data points used to calculate each RSI value. Positive integers are accepted (e.g., timeperiod=60, timeperiod=200)")
 	smaCmd.PersistentFlags().StringVarP(&seriesType, "seriestype", "y", "low", "The desired price type in the time series. Four types are supported: close, open, high, low")
 }

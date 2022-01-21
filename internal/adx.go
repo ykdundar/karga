@@ -26,7 +26,7 @@ type TechnicalAnalysisADXValue struct {
 	Adx string `json:"ADX"`
 }
 
-func ADXRequest(symbol string, interval string, time_period int) (ADX, error) {
+func ADXRequest(symbol string, interval string, timePeriod int) (ADX, error) {
 	const ENDPOINT_URL string = "ADX"
 
 	baseUrl := base_url()
@@ -35,7 +35,7 @@ func ADXRequest(symbol string, interval string, time_period int) (ADX, error) {
 	values.Add("function", ENDPOINT_URL)
 	values.Add("symbol", symbol)
 	values.Add("interval", interval)
-	values.Add("time_period", strconv.Itoa(time_period))
+	values.Add("time_period", strconv.Itoa(timePeriod))
 
 	baseUrl.RawQuery = values.Encode()
 

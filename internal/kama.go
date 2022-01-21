@@ -27,7 +27,7 @@ type TechnicalAnalysisKAMAValue struct {
 	Kama string `json:"KAMA"`
 }
 
-func KAMARequest(symbol string, interval string, time_period int, series_type string) (KAMA, error) {
+func KAMARequest(symbol string, interval string, timePeriod int, series_type string) (KAMA, error) {
 	const ENDPOINT_URL string = "KAMA"
 
 	baseUrl := base_url()
@@ -36,7 +36,7 @@ func KAMARequest(symbol string, interval string, time_period int, series_type st
 	values.Add("function", ENDPOINT_URL)
 	values.Add("symbol", symbol)
 	values.Add("interval", interval)
-	values.Add("time_period", strconv.Itoa(time_period))
+	values.Add("time_period", strconv.Itoa(timePeriod))
 	values.Add("series_type", series_type)
 
 	baseUrl.RawQuery = values.Encode()

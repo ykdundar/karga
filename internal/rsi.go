@@ -25,7 +25,7 @@ type RSIResponse struct {
 	TechnicalAnalysisRSI map[string]RSIValue `json:"Technical Analysis: RSI"`
 }
 
-func RSIRequest(symbol string, interval string, time_period int, series_type string) (RSIResponse, error) {
+func RSIRequest(symbol string, interval string, timePeriod int, series_type string) (RSIResponse, error) {
 	const ENDPOINT_URL string = "RSI"
 
 	baseUrl := base_url()
@@ -34,7 +34,7 @@ func RSIRequest(symbol string, interval string, time_period int, series_type str
 	values.Add("function", ENDPOINT_URL)
 	values.Add("symbol", symbol)
 	values.Add("interval", interval)
-	values.Add("time_period", strconv.Itoa(time_period))
+	values.Add("time_period", strconv.Itoa(timePeriod))
 	values.Add("series_type", series_type)
 
 	baseUrl.RawQuery = values.Encode()

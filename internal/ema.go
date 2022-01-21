@@ -27,7 +27,7 @@ type TechnicalAnalysisEMAValues struct {
 	Ema string `json:"EMA"`
 }
 
-func EMARequest(symbol string, interval string, time_period int, series_type string) (EMA, error) {
+func EMARequest(symbol string, interval string, timePeriod int, series_type string) (EMA, error) {
 	const ENDPOINT_URL string = "EMA"
 
 	baseUrl := base_url()
@@ -36,7 +36,7 @@ func EMARequest(symbol string, interval string, time_period int, series_type str
 	values.Add("function", ENDPOINT_URL)
 	values.Add("symbol", symbol)
 	values.Add("interval", interval)
-	values.Add("time_period", strconv.Itoa(time_period))
+	values.Add("time_period", strconv.Itoa(timePeriod))
 	values.Add("series_type", series_type)
 
 	baseUrl.RawQuery = values.Encode()

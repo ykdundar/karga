@@ -26,7 +26,7 @@ type TechnicalAnalysisATRValues struct {
 	Atr float64 `json:"ATR,string"`
 }
 
-func ATRRequest(symbol string, interval string, time_period int) (ATR, error) {
+func ATRRequest(symbol string, interval string, timePeriod int) (ATR, error) {
 	const ENDPOINT_URL string = "ATR"
 
 	baseUrl := base_url()
@@ -35,7 +35,7 @@ func ATRRequest(symbol string, interval string, time_period int) (ATR, error) {
 	values.Add("function", ENDPOINT_URL)
 	values.Add("symbol", symbol)
 	values.Add("interval", interval)
-	values.Add("time_period", strconv.Itoa(time_period))
+	values.Add("time_period", strconv.Itoa(timePeriod))
 
 	baseUrl.RawQuery = values.Encode()
 
