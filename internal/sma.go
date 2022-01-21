@@ -8,11 +8,11 @@ import (
 	"strconv"
 )
 
-type RSIValue struct {
-	Rsi float64 `json:"RSI,string"`
+type TechnicalAnalysisSMAValues struct {
+	Sma string `json:"SMA"`
 }
 
-type RSIResponse struct {
+type SMA struct {
 	MetaData struct {
 		Symbol        string `json:"1: Symbol"`
 		Indicator     string `json:"2: Indicator"`
@@ -22,11 +22,11 @@ type RSIResponse struct {
 		SeriesType    string `json:"6: Series Type"`
 		TimeZone      string `json:"7: Time Zone"`
 	} `json:"Meta Data"`
-	TechnicalAnalysisRSI map[string]RSIValue `json:"Technical Analysis: RSI"`
+	TechnicalAnalysisSMA map[string]TechnicalAnalysisSMAValues `json:"Technical Analysis: SMA"`
 }
 
-func RSIRequest(symbol string, interval string, timePeriod int, series_type string) (RSIResponse, error) {
-	const ENDPOINT_URL string = "RSI"
+func SMARequest(symbol string, interval string, timePeriod int, series_type string) (SMA, error) {
+	const ENDPOINT_URL string = "SMA"
 
 	baseUrl := base_url()
 	values := baseUrl.Query()
@@ -42,15 +42,14 @@ func RSIRequest(symbol string, interval string, timePeriod int, series_type stri
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return RSIResponse{}, errors.New("the HTTP request has failed with an error")
+		return SMA{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 
-		rsi := RSIResponse{}
+		sma := SMA{}
 
-		json.Unmarshal(data, &rsi)
+		json.Unmarshal(data, &sma)
 
-		return rsi, nil
+		return sma, nil
 	}
-
 }

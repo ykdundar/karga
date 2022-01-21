@@ -15,6 +15,7 @@ type TimeSeriesValue struct {
 	Volume float64 `json:"5. volume,string"`
 }
 
+// TODO: Fix dynamic TimeSeries key
 type Intraday struct {
 	MetaData struct {
 		Information   string `json:"1. Information"`
@@ -33,6 +34,7 @@ type Intraday struct {
 
 func IntradayRequest(symbol, interval string) (Intraday, error) {
 	const ENDPOINT_URL string = "TIME_SERIES_INTRADAY"
+
 	baseUrl := base_url()
 	values := baseUrl.Query()
 
@@ -45,7 +47,7 @@ func IntradayRequest(symbol, interval string) (Intraday, error) {
 	response, err := http.Get(baseUrl.String())
 
 	if err != nil {
-		return Intraday{}, errors.New("the HTTP request is failed with an error")
+		return Intraday{}, errors.New("the HTTP request has failed with an error")
 	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 
